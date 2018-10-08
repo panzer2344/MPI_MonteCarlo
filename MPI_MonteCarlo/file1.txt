@@ -1,0 +1,14 @@
+
+job aborted:
+[ranks] message
+
+[0] process exited without calling finalize
+
+[1-3] terminated
+
+---- error analysis -----
+
+[0] on DESKTOP-SSMTA3I
+D:\Git\MPI_Projects\Lab1_MonteCarlo\MPI_MonteCarlo\MPI_MonteCarlo\x64\Debug\MPI_MonteCarlo.exe ended prematurely and may have crashed. exit code 0xc0000005
+
+---- error analysis -----
