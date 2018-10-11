@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 	int size, rank;
 	double result = 0.0;
 	
-	const int measurementsNumber = 100; // number of the intervals
+	const int measurementsNumber = 1000; // number of the intervals
 	const double rightBorder = 10.0, leftBorder = 0.0;
 	double segmentLength = rightBorder - leftBorder;
 
@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 	MPI_Comm_size(MPI_COMM_WORLD, &size);  //getting number of processes
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank); // getting number of the current process
 
-	srand(time(0)); // needed for getting random value to calculate xi
+	srand(time(0) | clock()); // needed for getting random value to calculate xi
 
 	partSize = measurementsNumber / size;
 	restElementsNumber = measurementsNumber % partSize;
@@ -49,6 +49,7 @@ int main(int argc, char* argv[]) {
 	for (int i = 0; i < partSize; i++) {
 		double ri = (double)rand() / RAND_MAX; // getting a random value in interval [a, b] for calculating xi
 		xi = leftBorder + segmentLength * ri;  // that formula  for xi
+		cout << "Process #" << rank << " ri = " << ri << " xi = " << xi << endl;
 		partialSumValue += function(xi); 
 	}
 
@@ -68,6 +69,7 @@ int main(int argc, char* argv[]) {
 		for (int i = measurementsNumber - restElementsNumber; i < measurementsNumber; i++) {
 			double ri = (double)rand() / RAND_MAX;
 			xi = leftBorder + segmentLength * ri;
+			cout << "Process #" << rank << " ri = " << ri << " xi = " << xi << endl;
 			partialSumValue += function(xi);
 		}
 
